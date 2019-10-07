@@ -5,10 +5,37 @@
 {% endblock %}
 
 {% block content %}
-    <div class="jumbotron" id="header">
-        <h1 class="display-3">{{testText}}</h1>
-        <div class="col-md-4 offset-md-4">
-            {% include 'signup.html' %}
+
+    <div class="jumbotron">
+        <h1 class="display-3 logo-text" style="text-align:center;">Quotem</h1>
+        <p style="margin-top:-30px;text-align:center;margin-bottom:60px;" class="lead text-muted" style="text-align:center;">Quotes for days</p>
+            <center>
+                <a href="/login" class="btn btn-lg btn-outline-success" id="loginButton">Login</a>
+                <a href="/signup" class="btn btn-lg btn-outline-info">Sign Up</a>
+            </center>
         </div>
+
+    <div class="col-md-6 offset-md-3" id="featured">
+        <h2>Featured Quotes</h2>
+        <hr>
+        {% for quote in featuredQuotes %}
+        <blockquote class="blockquote text-center">
+            <p class="mb-0">{{quote.quote}}</p>
+            <footer class="blockquote-footer">{{quote.author}}</footer>
+        </blockquote>
+        {% endfor %}
     </div>
+
+    <div class="col-md-6 offset-md-3" id="recent">
+        <h2>Recent Quotes</h2>
+        <hr>
+        {% for quote in recentQuotes %}
+        <blockquote class="blockquote text-center">
+            <p class="mb-0">{{quote.quote}}</p>
+            <footer class="blockquote-footer">{{quote.author}}</footer>
+        </blockquote>
+        {% endfor %}
+    </div>
+
+    <script src="javascripts/index.js"></script>
 {% endblock %}

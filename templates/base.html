@@ -3,14 +3,54 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="stylesheets/style.css" />
+        <link rel="stylesheet" href="stylesheets/main.css" />
     </head>
     <body>
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="javascripts/main.js"></script>
-        <div class="col-md-12">
-            {% block content %}{% endblock %}
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand logo-text" href="/">QUOTEM</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                {% if index %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item" id="featuredButton">
+                        <a class="nav-link" href="#">Featured</a>
+                    </li>
+                    <li class="nav-item" id="recentButton">
+                        <a class="nav-link" href="#recent">Recent</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for category in categories %}
+                                <a class="dropdown-item" href="/category/{{category.slug}}">{{category.name}}</a>
+                            {% endfor %}
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/categories">More</a>
+                        </div>
+                    </li>
+                </ul>
+                {% endif %}
+                {% if not index %}
+                    <div class="offset-md-10">
+                        <a href="/login" id="loginButton">Login</a>
+                        <a href="/signup" class="btn btn-outline-info my-2 my-sm-0">Sign Up</a>
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+        </nav>
+        <div id="bodyContent" class="col-md-12">
+            <div class="col-md-8 offset-md-2">
+                {% block content %}{% endblock %}
+            </div>
         </div>
     </body>
 </html>
