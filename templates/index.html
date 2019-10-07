@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron" id="header">
+        <h1 class="display-3">{{testText}}</h1>
+        <div class="col-md-4 offset-md-4">
+            {% include 'signup.html' %}
+        </div>
+    </div>
+{% endblock %}
