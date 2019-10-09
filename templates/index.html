@@ -18,11 +18,8 @@
     <div class="col-md-6 offset-md-3" id="featured">
         <h2>Featured Quotes</h2>
         <hr>
-        {% for quote in featuredQuotes %}
-        <blockquote class="blockquote text-center">
-            <p class="mb-0">{{quote.quote}}</p>
-            <footer class="blockquote-footer">{{quote.author}}</footer>
-        </blockquote>
+        {% for quote in popularQuotes %}
+            {% include 'quotes.html' %}
         {% endfor %}
     </div>
 
@@ -30,10 +27,7 @@
         <h2>Recent Quotes</h2>
         <hr>
         {% for quote in recentQuotes %}
-        <blockquote class="blockquote text-center">
-            <p class="mb-0">{{quote.quote}}</p>
-            <footer class="blockquote-footer">{{quote.author}}</footer>
-        </blockquote>
+        hi
         {% endfor %}
     </div>
 

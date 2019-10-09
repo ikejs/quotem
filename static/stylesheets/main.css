@@ -10,3 +10,7 @@
 #bodyContent {
     margin-top:20px;
 }
+
+.btn {
+    border-radius: 10px;
+}

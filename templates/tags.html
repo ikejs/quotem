@@ -5,18 +5,18 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-4 offset-md-4">
         <table class="table" style="border:solid 4px #343A40;">
           <thead class="thead-dark">
             <tr>
-              <th colspan="2" style="border:none;text-align:center;" scope="col"><h1 class="display-4" style="font-size:30px;">Top Categories</h1></th>
+              <th colspan="2" style="border:none;text-align:center;" scope="col"><h1 class="display-4" style="font-size:30px;color:white;">Top Tags</h1></th>
             </tr>
           </thead>
           <tbody>
-              {% for category in categories %}
+              {% for tag in tags %}
                   <tr>
-                    <td>{{category.name}}</td>
-                    <td>{{category.quotes|length}}</td>
+                    <td><a href="/tag/{{tag['name']}}">#{{tag['name']}}</a></td>
+                    <td>{{tag.quotes|length}} quotes</td>
                   </tr>
               {% endfor %}
           </tbody>
