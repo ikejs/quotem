@@ -1,0 +1,8 @@
+<fieldset>
+    <legend><span class="fa fa-pencil"></span> New Quote</legend>
+    <div class='form-group'>
+        <p class='text-muted'>Enter your favorite quote</p>
+        <textarea autofocus class='form-control' id='quote' name='quote' rows='5' />{%if edit%}{{quote.quote}}{%endif%}</textarea>
+        <input type="text" value="{{user._id}}" name="userId" style="display:none;">
+    </div>
+</fieldset>

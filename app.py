@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-9
 
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from dotenv import load_dotenv
 from flask_pymongo import PyMongo
 from bson.json_util import dumps
@@ -156,6 +156,29 @@ def login():
     )
 
 
+
+@app.route('/new', methods=['GET', 'POST'])
+def new():
+    if request.method == 'GET':
+        if request.args.get('user'):
+            user = db.users.find_one({ 'username': request.args.get('user') })
+            return render_template(
+            'new.html',
+            title='Write Quote' + title,
+            user=user,
+            index=True
+            )
+    elif request.method == 'POST':
+        quote = {
+            'author': request.form.get('userId'),
+            'quote': request.form.get('quote'),
+            'likes': [],
+            'requotes': [],
+            'tags': []
+        }
+        inserttedQuote = db.quotes.insert_one(quote)
+        print(inserttedQuote)
+        return redirect('/')
 
 
 
