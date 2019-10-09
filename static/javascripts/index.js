@@ -1,14 +1,14 @@
 $("#recentButton").click(function() {
-    $("#featuredButton").removeClass("active");
+    $("#popularButton").removeClass("active");
     $("#recentButton").addClass("active");
 });
 
-$("#featuredButton").click(function() {
+$("#popularButton").click(function() {
     $("#recentButton").removeClass("active");
     $("#featuredButton").addClass("active");
 });
 
 function indexSetup() {
-    $("#featuredButton").addClass("active");
+    $("#popularButton").addClass("active");
     $("#recentButton").removeClass("active");
 }

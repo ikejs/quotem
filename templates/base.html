@@ -2,16 +2,15 @@
 <html>
     <head>
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="stylesheets/_bootswatch.scss" />
-        <link rel="stylesheet" href="stylesheets/_variables.scss" />
-        <link rel="stylesheet" href="stylesheets/bootstrap.min.css" />
-        <link rel="stylesheet" href="stylesheets/main.css" />
+        <link rel="stylesheet" href="../stylesheets/_bootswatch.scss" />
+        <link rel="stylesheet" href="../stylesheets/_variables.scss" />
+        <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" />
+        <link rel="stylesheet" href="../stylesheets/main.css" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     </head>
     <body>
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script src="javascripts/main.js"></script>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
                 <a class="navbar-brand logo-text" href="/">QUOTEM</a>
@@ -21,11 +20,14 @@
                 <div class="collapse navbar-collapse" id="navbarContent">
                 {% if index %}
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item" id="featuredButton">
-                        <a class="nav-link" href="#">Featured</a>
+                    <li class="nav-item {%if active=='index'%}active{%endif%}" id="popularButton">
+                        <a class="nav-link" href="/">Home</a>
                     </li>
-                    <li class="nav-item" id="recentButton">
-                        <a class="nav-link" href="#recent">Recent</a>
+                    <li class="nav-item {%if active=='popular'%}active{%endif%}" id="popularButton">
+                        <a class="nav-link" href="/popular">Popular</a>
+                    </li>
+                    <li class="nav-item {%if active=='recent'%}active{%endif%}" id="recentButton">
+                        <a class="nav-link" href="/recent">Recent</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
