@@ -5,19 +5,21 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-md-8 offset-md-2" style="margin-top:50px;">
+    <div class="col-md-12" style="margin-top:50px;">
         <h3>#{{tag['name']}}</h3>
         <hr>
-        {% for quote in quotes %}
-            <blockquote class="blockquote text-center card" style="border-radius:20px;padding:20px;">
+        <div class="row">
+            {% for quote in quotes %}
+            <blockquote class="blockquote text-center card col-md-5" style="border-radius:20px;padding:20px;margin:20px;margin-left:40px;">
                 <h3 style="text-align:left;margin-left:40px;"><span class="fa fa-quote-left"></span></h3>
                 <p class="mb-0">{{quote[0]['quote']}}</p>
                 <h3 style="text-align:right;margin-right:40px;"><span class="fa fa-quote-right"></span></h3>
-                <footer class="blockquote-footer">{{quote[1]['name']}}</footer>
-                <footer class="blockquote-footer">
-                    <p>{{quote.requotes|length}} <span class="fa fa-retweet"></span>       {{quote['likes']|length}} <span class="fa fa-heart"></p>
+                <footer class="blockquote-footer"><a href="/u/{{quote[1]['username']}}">{{quote[1]['name']}}</a></footer>
+                <footer style="margin-top:20px;">
+                    <p>{{quote[0]['requotes']|length}} <span class="fa fa-retweet" style="margin-right:10px;"></span>       {{quote[0]['likes']|length}} <span class="fa fa-heart"></p>
                 </footer>
             </blockquote>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
