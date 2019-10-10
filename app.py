@@ -145,7 +145,7 @@ def tag(slug):
 def user(username):
     tags = db["tags"].find({ 'featured': True })
     user = db['users'].find_one({ 'username': username })
-    quotesList = db['quotes'].find({ 'author': str(user['_id']) })
+    quotesList = db['quotes'].find({ 'author': str(user['_id']) }).sort([('_id', -1)])
     quotes=[]
     for quote in quotesList:
         quotes.append([quote, user])
@@ -166,14 +166,12 @@ def signup():
     )
 
 
-
 @app.route('/login')
 def login():
     return render_template(
     'login.html',
     title='Login' + title
     )
-
 
 
 @app.route('/new', methods=['GET', 'POST'])
@@ -202,7 +200,6 @@ def new():
         return redirect('/')
 
 
-
 @app.route('/edit/<quoteId>')
 def edit(quoteId):
     tags = db["tags"].find({ 'featured': True })
@@ -217,12 +214,11 @@ def edit(quoteId):
     index=True
     )
 
+
 @app.route('/edit/<quoteId>', methods=['POST'])
 def post_edit(quoteId):
     quote = db["quotes"].find_one({ '_id': ObjectId(quoteId) })
-    print(str(quote)+"\n \n \n \n \n \n \n")
     user = db.users.find_one({ '_id': ObjectId(quote['author']) })
-    print(str(user)+"\n \n \n \n \n \n \n")
     quoteObj = {
         'quote': request.form.get('quote'),
         'author': str(user["_id"])
@@ -231,6 +227,12 @@ def post_edit(quoteId):
         {'_id': ObjectId(quote['_id'])},
         {'$set': quoteObj })
     return redirect("/u/"+user['username'])
+
+
+@app.route('/delete/<quoteId>', methods=['POST'])
+def post_delete(quoteId):
+    db['quotes'].delete_one({'_id': ObjectId(quoteId)})
+    return redirect('/u/ikeholzmann')
 
 
 if __name__ == '__main__':

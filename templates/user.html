@@ -9,13 +9,25 @@
         <h3>{{user['name']}}'s Quotes</h3>
         <hr>
         <div class="row">
+            <script>
+                function deleteQuote(quote) {
+                    $.post("/delete", {"quoteId": quote['_id']})
+                }
+            </script>
             {% for quote in quotes %}
             <blockquote class="blockquote text-center card col-md-5" style="border-radius:20px;padding:20px;margin:20px;margin-left:40px;">
-                <center><a href="/edit/{{quote[0]['_id']}}" class="btn btn-info btn-sm" style="width:50px;font-size:20px;"><span class="fa fa-edit"></span></a><a href="/delete/{{quote[0]['_id']}}" class="btn btn-danger btn-sm" style="width:50px;font-size:20px;margin-left:20px;"><span class="fa fa-trash"></span></a></center>
+                <center>
+                    <form style="float:right;" action="/delete/{{quote[0]['_id']}}" method="POST">
+                        <a href="/edit/{{quote[0]['_id']}}" class="btn btn-info btn-sm" style="width:50px;font-size:20px;float:left;"><span class="fa fa-edit"></span></a>
+                        <button class="btn btn-danger btn-sm" type="submit" style="width:50px;font-size:20px;margin-left:20px;">
+                            <span class="fa fa-trash"></span>
+                        </button>
+                    </form>
+                </center>
                 <h3 style="text-align:left;margin-left:40px;"><span class="fa fa-quote-left"></span></h3>
                 <p class="mb-0">{{quote[0]['quote']}}</p>
                 <h3 style="text-align:right;margin-right:40px;"><span class="fa fa-quote-right"></span></h3>
-                <footer class="blockquote-footer"><a href="/u/{{quote[1]['name']}}">{{quote[1]['name']}}</a></footer>
+                <footer class="blockquote-footer"><a href="/u/{{quote[1]['username']}}">{{quote[1]['name']}}</a></footer>
                 <footer style="margin-top:20px;">
                     <p>{{quote[0]['requotes']|length}} <span class="fa fa-retweet" style="margin-right:10px;"></span>       {{quote[0]['likes']|length}} <span class="fa fa-heart"></p>
                 </footer>

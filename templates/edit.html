@@ -8,7 +8,7 @@
             <div class='form-group'>
                 <p class='text-muted'>Enter your favorite quote</p>
                 <textarea autofocus class='form-control' id='quote' name='quote' rows='5'>{{quote['quote']}}</textarea>
-                <input type="text" value="{{user['_id']}}" name="userId">
+                <input type="text" value="{{user['_id']}}" name="userId" style="display:none;">
             </div>
             <footer class="blockquote-footer">{{user.name}}</footer>
             <hr>
