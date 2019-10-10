@@ -8,13 +8,12 @@ from bson.json_util import dumps
 from bson.objectid import ObjectId
 import pprint
 
-app = Flask(__name__, static_url_path='')
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Playlister')
+client = MongoClient(host=f'{host}?retryWrites=false')
+data_b = client.get_default_database()
+db = data_b.db
 
-# MongoDB location & secret key
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/quotem'
-app.config['SECRET_KEY'] = 'shhhhhhhhhhhhhhhhhhhhhhhhhhhhh'
-mongo = PyMongo(app)
-db = mongo.db
+app = Flask(__name__)
 
 # Title string placed after each page name
 title = " | Quotem - Quotes for days 🤡".decode('utf-8')
@@ -236,4 +235,4 @@ def post_delete(quoteId):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
