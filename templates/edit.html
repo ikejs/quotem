@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3 card" style="margin-top:200px;margin-bottom:300px;padding:50px;border-radius:20px;">
+    <form method='POST' action='/edit/{{quote["_id"]}}'>
+        <fieldset>
+            <legend><span class="fa fa-pencil"></span> Edit Quote</legend>
+            <div class='form-group'>
+                <p class='text-muted'>Enter your favorite quote</p>
+                <textarea autofocus class='form-control' id='quote' name='quote' rows='5'>{{quote['quote']}}</textarea>
+                <input type="text" value="{{user['_id']}}" name="userId">
+            </div>
+            <footer class="blockquote-footer">{{user.name}}</footer>
+            <hr>
+            <div class='form-group'>
+                <button class='btn btn-primary' type='submit'>Update Quote</button>
+                <a style="float:right;margin-top:15px;" href="/" onclick="return confirm('Are you sure you want to cancel? Your changes will be deleted.')">Cancel</a>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

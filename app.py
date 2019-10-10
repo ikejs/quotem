@@ -126,6 +126,7 @@ def tags():
 
 @app.route('/tag/<slug>')
 def tag(slug):
+    tags = db["tags"].find({ 'featured': True })
     tag = db['tags'].find_one({ 'slug': slug })
     quotesList = db['quotes'].find({ 'tags': { '$in' : [ str(tag['_id']) ]}})
     quotes=[]
@@ -134,8 +135,26 @@ def tag(slug):
     return render_template(
         'tag.html',
         tag=tag,
+        tags=tags,
         quotes=quotes,
         title=tag['name'] + ' Quotes' + title
+        )
+
+
+@app.route('/u/<username>')
+def user(username):
+    tags = db["tags"].find({ 'featured': True })
+    user = db['users'].find_one({ 'username': username })
+    quotesList = db['quotes'].find({ 'author': str(user['_id']) })
+    quotes=[]
+    for quote in quotesList:
+        quotes.append([quote, user])
+    return render_template(
+        'user.html',
+        user=user,
+        quotes=quotes,
+        tags=tags,
+        title=user['name'] +  "'s Quotes'" + title
         )
 
 
@@ -160,12 +179,14 @@ def login():
 @app.route('/new', methods=['GET', 'POST'])
 def new():
     if request.method == 'GET':
+        tags = db["tags"].find({ 'featured': True })
         if request.args.get('user'):
             user = db.users.find_one({ 'username': request.args.get('user') })
             return render_template(
             'new.html',
             title='Write Quote' + title,
             user=user,
+            tags=tags,
             index=True
             )
     elif request.method == 'POST':
@@ -180,6 +201,36 @@ def new():
         print(inserttedQuote)
         return redirect('/')
 
+
+
+@app.route('/edit/<quoteId>')
+def edit(quoteId):
+    tags = db["tags"].find({ 'featured': True })
+    quote = db["quotes"].find_one({ '_id': ObjectId(quoteId) })
+    user = db.users.find_one({ '_id': ObjectId(quote['author']) })
+    return render_template(
+    'edit.html',
+    title='Edit Quote' + title,
+    user=user,
+    tags=tags,
+    quote=quote,
+    index=True
+    )
+
+@app.route('/edit/<quoteId>', methods=['POST'])
+def post_edit(quoteId):
+    quote = db["quotes"].find_one({ '_id': ObjectId(quoteId) })
+    print(str(quote)+"\n \n \n \n \n \n \n")
+    user = db.users.find_one({ '_id': ObjectId(quote['author']) })
+    print(str(user)+"\n \n \n \n \n \n \n")
+    quoteObj = {
+        'quote': request.form.get('quote'),
+        'author': str(user["_id"])
+    }
+    db["quotes"].update_one(
+        {'_id': ObjectId(quote['_id'])},
+        {'$set': quoteObj })
+    return redirect("/u/"+user['username'])
 
 
 if __name__ == '__main__':
