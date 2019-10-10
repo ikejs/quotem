@@ -14,7 +14,7 @@ db = client.get_default_database().quotem
 app = Flask(__name__)
 
 # Title string placed after each page name
-title = " | Quotem - Quotes for days 🤡".decode('utf-8')
+title = " | Quotem - Quotes for days"
 
 @app.route('/')
 def index():
