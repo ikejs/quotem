@@ -34,7 +34,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% for tag in tags %}
-                                <a class="dropdown-item" href="/tag/{{tag.slug}}">{{tag.name}}</a>
+                                <a class="dropdown-item" href="/tag/{{tag.slug}}">#{{tag.name}}</a>
                             {% endfor %}
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/tags">More</a>

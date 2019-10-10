@@ -92,7 +92,7 @@ def recent():
         recentQuotes.append([quoteObj, authorObj])
     return render_template(
         'recent.html',
-        title='Popular Quotes' + title,
+        title='Recent Quotes' + title,
         recentQuotes=recentQuotes,
         tags=tags,
         index=True,
@@ -182,7 +182,7 @@ def new():
             user = db.users.find_one({ 'username': request.args.get('user') })
             return render_template(
             'new.html',
-            title='Write Quote' + title,
+            title='New Quote' + title,
             user=user,
             tags=tags,
             index=True

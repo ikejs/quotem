@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    {{title}}
+{% endblock %}
+
 {% block content %}
 <div class="col-md-6 offset-md-3 card" style="margin-top:200px;margin-bottom:300px;padding:50px;border-radius:20px;">
     <form method='POST' action='/edit/{{quote["_id"]}}'>
