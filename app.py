@@ -2,10 +2,9 @@
 
 from flask import Flask, render_template, request, redirect
 from dotenv import load_dotenv
-from bson.json_util import dumps
+from pymongo import MongoClient
 from bson.objectid import ObjectId
 import os
-import pprint
 
 host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Quotem')
 client = MongoClient(host=f'{host}?retryWrites=false')
