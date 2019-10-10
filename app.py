@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-9
 
-
 from flask import Flask, render_template, request, redirect
 from dotenv import load_dotenv
 from flask_pymongo import PyMongo
 from bson.json_util import dumps
 from bson.objectid import ObjectId
+import os
 import pprint
 
-host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Playlister')
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Quotem')
 client = MongoClient(host=f'{host}?retryWrites=false')
-db = client.get_default_database() 
+data_b = client.get_default_database()
+db = data_b.db
 
 app = Flask(__name__)
 
