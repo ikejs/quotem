@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-9
 
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect
 from dotenv import load_dotenv
 from flask_pymongo import PyMongo
 from bson.json_util import dumps
